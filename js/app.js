@@ -115,10 +115,10 @@ function handleClick(evt) {
       index = parseInt(stored[stored.length-1])
       gameBoard[index] = turn
       evt.target.value = turn
-      turn = turn * -1
+     
     }
-    
-   getWinner()
+    turn = turn * -1
+    getWinner()
     
     // console.log(evt.target.value)
     console.log(gameBoard)
@@ -129,8 +129,7 @@ function handleClick(evt) {
   }
 
   function getWinner() {//check if any are null
-     
-
+    
     if (gameBoard[0]===1 && gameBoard[1]===1 && gameBoard[2]===1) {
       return winner = 1}
     if (gameBoard[3]===1 && gameBoard[4]===1 && gameBoard[5]===1) {
@@ -167,26 +166,61 @@ function handleClick(evt) {
         return winner = -1  }    
 
 
-
-    // winningCombos.forEach(function (combo) {
-    //   combo.reduce((acc, number)=> {
-    //     let total
-    //     total = acc + number
-    //     // console.log(total)
-    //   }, 0)
-    // })
+    checkForTie()
+  //  else if (hasNull) {
+  //     return winner = "T"
+  //   }
+  render()  
   }
 
-
 function checkForTie() {
-  gameBoard.some(function (item) {
-    item === null
-    
+  let hasNull = gameBoard.some(function (sq) {
+    return sq === null
   })
+if (!hasNull){
+  return winner = "T"
 }
-console.log(gameBoard.some(function (item) {
-  item !== null
+
+}
+
   
-}))
 
 
+
+
+
+
+// if (gameBoard[0]===1 && gameBoard[1]===1 && gameBoard[2]===1) {
+//   return winner = 1}
+// if (gameBoard[3]===1 && gameBoard[4]===1 && gameBoard[5]===1) {
+//   return winner = 1  }
+// if (gameBoard[6]===1 && gameBoard[7]===1 && gameBoard[8]===1) {
+//   return winner = 1  }
+// if (gameBoard[0]===1 && gameBoard[3]===1 && gameBoard[6]===1) {
+//     return winner = 1  }
+// if (gameBoard[1]===1 && gameBoard[4]===1 && gameBoard[7]===1) {
+//     return winner = 1  }
+// if (gameBoard[2]===1 && gameBoard[5]===1 && gameBoard[8]===1) {
+//     return winner = 1  }
+// if (gameBoard[0]===1 && gameBoard[4]===1 && gameBoard[8]===1) {
+//     return winner = 1  }
+// if (gameBoard[2]===1 && gameBoard[4]===1 && gameBoard[6]===1) {
+//     return winner = 1  }
+
+
+// if (gameBoard[0]===-1 && gameBoard[1]===-1 && gameBoard[2]===-1) {
+//   return winner = -1}
+// if (gameBoard[3]===-1 && gameBoard[4]===-1 && gameBoard[5]===-1) {
+//   return winner = -1  }
+// if (gameBoard[6]===-1 && gameBoard[7]===-1 && gameBoard[8]===-1) {
+//   return winner = -1  }
+// if (gameBoard[0]===-1 && gameBoard[3]===-1 && gameBoard[6]===-1) {
+//     return winner = -1  }
+// if (gameBoard[-1]===-1 && gameBoard[4]===-1 && gameBoard[7]===-1) {
+//     return winner = -1  }
+// if (gameBoard[2]===-1 && gameBoard[5]===-1 && gameBoard[8]===-1) {
+//     return winner = -1  }
+// if (gameBoard[0]===-1 && gameBoard[4]===-1 && gameBoard[8]===-1) {
+//     return winner = -1  }
+// if (gameBoard[2]===-1 && gameBoard[4]===-1 && gameBoard[6]===-1) {
+//     return winner = -1  }  
