@@ -1,5 +1,14 @@
 /*-------------------------------- Constants --------------------------------*/
-
+const winningCombos = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+ ]
 
 
 /*---------------------------- Variables (state) ----------------------------*/
@@ -22,42 +31,33 @@ let winner
 // let bottomMid = document.getElementById('sq7')
 // let bottomRight = document.getElementById('sq8')
 
-let boardEl = document.querySelectorAll('.board-square')
-
+const allSquares = document.querySelectorAll('.board-square')
 let gameMessage = document.getElementById('message')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
-
+// document.querySelector('.board-square').addEventListener("click", handleClick)
+document.querySelector('.board').addEventListener('click', handleClick)
   
-  
+ 
 
 /*-------------------------------- Functions --------------------------------*/
 function init() {
   gameBoard = [null,null,null,null,null,null,null,null,null ]
-  //console.log(gameBoard)
- 
-  // gameBoard.map(function (sq, i) {
-  //   boardEl.item[i] = sq
-  //   //console.log(boardEl)
-    
-  //   // console.log(boardEl)
-  //   return boardEl
-  // })
-  // console.log(boardEl.item[0])
-    
-  // topLeft = gameBoard[0]
-  // topMid = gameBoard[1]
-  // topRight = gameBoard[2]
-  // midLeft = gameBoard[3]
-  // midMid = gameBoard[4]
-  // midRight = gameBoard[5]
-  // bottomLeft = gameBoard[6]
-  // bottomMid = gameBoard[7]
-  // bottomRight = gameBoard[8]
-
   turn = 1
   winner = null
+  allSquares[0].value = gameBoard [0]
+  allSquares[1].value = gameBoard [1]
+  allSquares[2].value = gameBoard [2]
+  allSquares[3].value = gameBoard [3]
+  allSquares[4].value = gameBoard [4]
+  allSquares[5].value = gameBoard [5]
+  allSquares[6].value = gameBoard [6]
+  allSquares[7].value = gameBoard [7]
+  allSquares[8].value = gameBoard [8]
+  
+  
+
 
   render()
   
@@ -75,22 +75,118 @@ renderMessage()
 function checkGameBoard() {
   gameBoard.forEach(function (square, i) {
     if (square === 1) {
-     boardEl[i].textContent = "X" 
-     boardEl[i].style.color = "red"
-     boardEl[i].style.backgroundColor = "white"
+      allSquares[i].textContent = "X" 
+      allSquares[i].style.color = "red"
+      allSquares[i].style.backgroundColor = "white"
     } else if (square === -1){
-      boardEl[i].textContent = 'O'
-      boardEl[i].style.color = "Green"
-      boardEl[i].style.backgroundColor = "white"
+      allSquares[i].textContent = 'O'
+      allSquares[i].style.color = "Green"
+      allSquares[i].style.backgroundColor = "white"
     }
     })
+
+    
 }
 
 
 function renderMessage() {
-  if (winner === null) {
-    gameMessage.textContent = `${turn ===1 ? `It's Player 1's Turn! Place your "X" ` : `It is player 2's turn! Place Your "O"` }`
+  if (winner !== null) {
+    gameMessage.textContent = `${turn === 1 ? `It's Player 1's Turn! Place your "X" ` : `It is player 2's turn! Place Your "O"` }`
+  }
+  if (winner === 1 || winner === -1) {
+    gameMessage.textContent = `${winner === 1 ? `Player 1 (X) Wins! Play Again?` : `Player 2 (O) Wins! Play Again? }` }`
+  }
+  if (winner === "T") {
+    gameMessage.textContent = `The Game is a Tie! Would You Like to Play Again?` }
   }
  
+function handleClick(evt) {
+    if (evt.target.value !==null) {
+      return
+    }
+    if(winner !== null){
+      return
+    }
+    
+    if (evt.target.value === null) {
+      let stored
+      let index
+      stored = evt.target.id.split('')
+      index = parseInt(stored[stored.length-1])
+      gameBoard[index] = turn
+      evt.target.value = turn
+      turn = turn * -1
+    }
+    
+   getWinner()
+    
+    // console.log(evt.target.value)
+    console.log(gameBoard)
+    // console.log(turn)
+
+    // console.log(gameBoard)
+    render()
+  }
+
+  function getWinner() {//check if any are null
+     
+
+    if (gameBoard[0]===1 && gameBoard[1]===1 && gameBoard[2]===1) {
+      return winner = 1}
+    if (gameBoard[3]===1 && gameBoard[4]===1 && gameBoard[5]===1) {
+      return winner = 1  }
+    if (gameBoard[6]===1 && gameBoard[7]===1 && gameBoard[8]===1) {
+      return winner = 1  }
+    if (gameBoard[0]===1 && gameBoard[3]===1 && gameBoard[6]===1) {
+        return winner = 1  }
+    if (gameBoard[1]===1 && gameBoard[4]===1 && gameBoard[7]===1) {
+        return winner = 1  }
+    if (gameBoard[2]===1 && gameBoard[5]===1 && gameBoard[8]===1) {
+        return winner = 1  }
+    if (gameBoard[0]===1 && gameBoard[4]===1 && gameBoard[8]===1) {
+        return winner = 1  }
+    if (gameBoard[2]===1 && gameBoard[4]===1 && gameBoard[6]===1) {
+        return winner = 1  }
+
+
+    if (gameBoard[0]===-1 && gameBoard[1]===-1 && gameBoard[2]===-1) {
+      return winner = -1}
+    if (gameBoard[3]===-1 && gameBoard[4]===-1 && gameBoard[5]===-1) {
+      return winner = -1  }
+    if (gameBoard[6]===-1 && gameBoard[7]===-1 && gameBoard[8]===-1) {
+      return winner = -1  }
+    if (gameBoard[0]===-1 && gameBoard[3]===-1 && gameBoard[6]===-1) {
+        return winner = -1  }
+    if (gameBoard[-1]===-1 && gameBoard[4]===-1 && gameBoard[7]===-1) {
+        return winner = -1  }
+    if (gameBoard[2]===-1 && gameBoard[5]===-1 && gameBoard[8]===-1) {
+        return winner = -1  }
+    if (gameBoard[0]===-1 && gameBoard[4]===-1 && gameBoard[8]===-1) {
+        return winner = -1  }
+    if (gameBoard[2]===-1 && gameBoard[4]===-1 && gameBoard[6]===-1) {
+        return winner = -1  }    
+
+
+
+    // winningCombos.forEach(function (combo) {
+    //   combo.reduce((acc, number)=> {
+    //     let total
+    //     total = acc + number
+    //     // console.log(total)
+    //   }, 0)
+    // })
+  }
+
+
+function checkForTie() {
+  gameBoard.some(function (item) {
+    item === null
+    
+  })
 }
+console.log(gameBoard.some(function (item) {
+  item !== null
+  
+}))
+
 
