@@ -7,6 +7,9 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  text-align: center;
+  background-image: url("https://cdn7.dissolve.com/p/D2115_198_929/D2115_198_929_1200.jpg");
+  background-size: cover;
 }
 
 section.board {
@@ -14,6 +17,8 @@ section.board {
   grid-template-rows: repeat(3, 10vmin);
   grid-template-columns: repeat(3, 10vmin);
   grid-gap: 0vmin;
+  margin: 0 auto;
+  background-color: rgba(105, 126, 126, 0.708);
 }
 
 div {
@@ -23,3 +28,6 @@ div {
   vertical-align: middle;
 }
 
+h1, h2 {
+background-color: rgba(105, 126, 126, 0.708);
+}

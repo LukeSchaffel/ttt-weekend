@@ -34,7 +34,7 @@ let gameMessage = document.getElementById('message')
 
 /*-------------------------------- Functions --------------------------------*/
 function init() {
-  gameBoard = [1,-1,1,-1,null,null,null,null,null ]
+  gameBoard = [null,null,null,null,null,null,null,null,null ]
   //console.log(gameBoard)
  
   // gameBoard.map(function (sq, i) {
