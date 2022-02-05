@@ -61,7 +61,7 @@ function init() {
 
 
   render()
-  
+  replay.setAttribute('hidden', true)
   }
   
   init()
@@ -101,7 +101,7 @@ function renderMessage() {
     gameMessage.textContent = `${winner === 1 ? `Player 1 (X) Wins! Play Again?` : `Player 2 (O) Wins! Play Again? }` }`
   }
   if (winner === "T") {
-    gameMessage.textContent = `The Game is a Tie! Would You Like to Play Again?` }
+    gameMessage.textContent = `The Game is a Tie! Would You Like to Play Again?`  }
   }
  
 function handleClick(evt) {
