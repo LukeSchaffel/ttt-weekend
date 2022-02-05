@@ -33,12 +33,13 @@ let winner
 
 const allSquares = document.querySelectorAll('.board-square')
 let gameMessage = document.getElementById('message')
+let replay = document.getElementById('play-again')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 // document.querySelector('.board-square').addEventListener("click", handleClick)
 document.querySelector('.board').addEventListener('click', handleClick)
-  
+document.querySelector("#play-again").addEventListener('click', restart) 
  
 
 /*-------------------------------- Functions --------------------------------*/
@@ -68,7 +69,7 @@ function init() {
 function render() {
 checkGameBoard()  
 renderMessage()
-
+displayReplay()
 
 }
 
@@ -82,6 +83,9 @@ function checkGameBoard() {
       allSquares[i].textContent = 'O'
       allSquares[i].style.color = "Green"
       allSquares[i].style.backgroundColor = "white"
+    } else {
+      allSquares[i].textContent = ""
+      allSquares[i].style.backgroundColor = "rgba(105, 126, 126, 0.708)"
     }
     })
 
@@ -90,7 +94,7 @@ function checkGameBoard() {
 
 
 function renderMessage() {
-  if (winner !== null) {
+  if (winner === null) {
     gameMessage.textContent = `${turn === 1 ? `It's Player 1's Turn! Place your "X" ` : `It is player 2's turn! Place Your "O"` }`
   }
   if (winner === 1 || winner === -1) {
@@ -156,7 +160,7 @@ function handleClick(evt) {
       return winner = -1  }
     if (gameBoard[0]===-1 && gameBoard[3]===-1 && gameBoard[6]===-1) {
         return winner = -1  }
-    if (gameBoard[-1]===-1 && gameBoard[4]===-1 && gameBoard[7]===-1) {
+    if (gameBoard[1]===-1 && gameBoard[4]===-1 && gameBoard[7]===-1) {
         return winner = -1  }
     if (gameBoard[2]===-1 && gameBoard[5]===-1 && gameBoard[8]===-1) {
         return winner = -1  }
@@ -166,10 +170,7 @@ function handleClick(evt) {
         return winner = -1  }    
 
 
-    checkForTie()
-  //  else if (hasNull) {
-  //     return winner = "T"
-  //   }
+  checkForTie()
   render()  
   }
 
@@ -185,8 +186,18 @@ if (!hasNull){
 
   
 
+function displayReplay() {
+  if (winner !== null){
+  replay.removeAttribute('hidden', false)
+  }
+}
 
 
+
+function restart() {
+  init()
+  allSquares.textContent=""
+}
 
 
 
