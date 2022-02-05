@@ -98,7 +98,7 @@ function renderMessage() {
     gameMessage.textContent = `${turn === 1 ? `It's Player 1's Turn! Place your "X" ` : `It is player 2's turn! Place Your "O"` }`
   }
   if (winner === 1 || winner === -1) {
-    gameMessage.textContent = `${winner === 1 ? `Player 1 (X) Wins! Play Again?` : `Player 2 (O) Wins! Play Again? }` }`
+    gameMessage.textContent = `${winner === 1 ? `Player 1 (X) Wins! Play Again?` : `Player 2 (O) Wins! Play Again?` }`
   }
   if (winner === "T") {
     gameMessage.textContent = `The Game is a Tie! Would You Like to Play Again?`  }
