@@ -1,5 +1,5 @@
 /*-------------------------------- Constants --------------------------------*/
-const winningCombos = [
+const winningCombos = [//i didnt even end up using this.
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -15,29 +15,22 @@ const winningCombos = [
 let gameBoard = []
 let turn 
 let winner
-
+let p1Wins = 0
+let p2Wins = 0
 
 
 
 
 /*------------------------ Cached Element References ------------------------*/
-// let topLeft = document.getElementById('sq0')
-// let topMid = document.getElementById('sq1')
-// let topRight = document.getElementById('sq2')
-// let midLeft = document.getElementById('sq3')
-// let midMid = document.getElementById('sq4')
-// let midRight = document.getElementById('sq5')
-// let bottomLeft = document.getElementById('sq6')
-// let bottomMid = document.getElementById('sq7')
-// let bottomRight = document.getElementById('sq8')
 
 const allSquares = document.querySelectorAll('.board-square')
 let gameMessage = document.getElementById('message')
 let replay = document.getElementById('play-again')
+let p1ScoreBoard = document.getElementById('p1-wins-total')
+let p2ScoreBoard = document.getElementById('p2-wins-total')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
-// document.querySelector('.board-square').addEventListener("click", handleClick)
 document.querySelector('.board').addEventListener('click', handleClick)
 document.querySelector("#play-again").addEventListener('click', restart) 
  
@@ -70,7 +63,7 @@ function render() {
 checkGameBoard()  
 renderMessage()
 displayReplay()
-
+updateScoreBoard()
 }
 
 function checkGameBoard() {
@@ -98,10 +91,10 @@ function renderMessage() {
     gameMessage.textContent = `${turn === 1 ? `It's Player 1's Turn! Place your "X" ` : `It is player 2's turn! Place Your "O"` }`
   }
   if (winner === 1 || winner === -1) {
-    gameMessage.textContent = `${winner === 1 ? `Player 1 (X) Wins! Play Again?` : `Player 2 (O) Wins! Play Again?` }`
+    gameMessage.textContent = `${winner === 1 ? `Player 1 (X) Wins!` : `Player 2 (O) Wins!` }`
   }
   if (winner === "T") {
-    gameMessage.textContent = `The Game is a Tie! Would You Like to Play Again?`  }
+    gameMessage.textContent = `The Game is a Tie!`  }
   }
  
 function handleClick(evt) {
@@ -124,15 +117,14 @@ function handleClick(evt) {
     turn = turn * -1
     getWinner()
     
-    // console.log(evt.target.value)
-    console.log(gameBoard)
-    // console.log(turn)
 
-    // console.log(gameBoard)
+   
     render()
   }
 
-  function getWinner() {//check if any are null
+
+  //my getWinner function is ugly, but functional. I had a hard time understating the way it was psudocoded in the insturctions so i came up with this
+  function getWinner() {
     
     if (gameBoard[0]===1 && gameBoard[1]===1 && gameBoard[2]===1) {
       return winner = 1}
@@ -174,6 +166,7 @@ function handleClick(evt) {
   render()  
   }
 
+
 function checkForTie() {
   let hasNull = gameBoard.some(function (sq) {
     return sq === null
@@ -199,39 +192,13 @@ function restart() {
   allSquares.textContent=""
 }
 
-
-
-// if (gameBoard[0]===1 && gameBoard[1]===1 && gameBoard[2]===1) {
-//   return winner = 1}
-// if (gameBoard[3]===1 && gameBoard[4]===1 && gameBoard[5]===1) {
-//   return winner = 1  }
-// if (gameBoard[6]===1 && gameBoard[7]===1 && gameBoard[8]===1) {
-//   return winner = 1  }
-// if (gameBoard[0]===1 && gameBoard[3]===1 && gameBoard[6]===1) {
-//     return winner = 1  }
-// if (gameBoard[1]===1 && gameBoard[4]===1 && gameBoard[7]===1) {
-//     return winner = 1  }
-// if (gameBoard[2]===1 && gameBoard[5]===1 && gameBoard[8]===1) {
-//     return winner = 1  }
-// if (gameBoard[0]===1 && gameBoard[4]===1 && gameBoard[8]===1) {
-//     return winner = 1  }
-// if (gameBoard[2]===1 && gameBoard[4]===1 && gameBoard[6]===1) {
-//     return winner = 1  }
-
-
-// if (gameBoard[0]===-1 && gameBoard[1]===-1 && gameBoard[2]===-1) {
-//   return winner = -1}
-// if (gameBoard[3]===-1 && gameBoard[4]===-1 && gameBoard[5]===-1) {
-//   return winner = -1  }
-// if (gameBoard[6]===-1 && gameBoard[7]===-1 && gameBoard[8]===-1) {
-//   return winner = -1  }
-// if (gameBoard[0]===-1 && gameBoard[3]===-1 && gameBoard[6]===-1) {
-//     return winner = -1  }
-// if (gameBoard[-1]===-1 && gameBoard[4]===-1 && gameBoard[7]===-1) {
-//     return winner = -1  }
-// if (gameBoard[2]===-1 && gameBoard[5]===-1 && gameBoard[8]===-1) {
-//     return winner = -1  }
-// if (gameBoard[0]===-1 && gameBoard[4]===-1 && gameBoard[8]===-1) {
-//     return winner = -1  }
-// if (gameBoard[2]===-1 && gameBoard[4]===-1 && gameBoard[6]===-1) {
-//     return winner = -1  }  
+function updateScoreBoard() {
+  if (winner === 1) {
+    p1Wins ++
+    p1ScoreBoard.textContent = p1Wins
+  } else if (winner === -1){
+    p2Wins ++
+    p2ScoreBoard.textContent = p2Wins
+  }
+  return
+}

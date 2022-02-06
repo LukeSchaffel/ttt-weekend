@@ -8,8 +8,8 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
-  background-image: url("https://cdn7.dissolve.com/p/D2115_198_929/D2115_198_929_1200.jpg");
-  background-size: cover;
+  background-image: url("https://i2.pickpik.com/photos/717/189/195/texture-paper-map-overlay-preview.jpg");
+  background-size: contain;
 }
 
 section.board {
@@ -40,4 +40,10 @@ background-color: rgba(105, 126, 126, 0.708);
 .button-section {
   margin-top: 50px;
 
+}
+
+#score-board {
+  text-align: center;
+
+  background-color: azure;
 }
